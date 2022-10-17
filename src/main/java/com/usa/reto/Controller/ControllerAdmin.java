@@ -1,18 +1,14 @@
 package com.usa.reto.Controller;
 
 import com.usa.reto.Model.Admin;
+import com.usa.reto.Model.Client;
 import com.usa.reto.Service.ServiceAdmin;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/Admin")
@@ -26,10 +22,24 @@ public class ControllerAdmin {
     public List<Admin> getAdmin(){
         return service.getAll();
     }
+    @GetMapping("/{id}")
+    public Optional<Admin>getAdmin(@PathVariable("id")int id){
+        return service.getAdmin(id);
+    }
     
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody Admin admin) {
         service.save(admin);
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Admin update(@RequestBody Admin admin){
+        return service.update(admin);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id")int adminId){
+        return service.delete(adminId);
     }
 }

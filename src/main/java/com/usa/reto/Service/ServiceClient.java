@@ -33,4 +33,36 @@ public class ServiceClient {
             }
         }
     }
+    public Client update(Client client){
+        if(client.getIdClient() != null){
+            Optional<Client>cAux =getClient(client.getIdClient());
+            if(!cAux.isEmpty()){
+                if(client.getName() != null){
+                    cAux.get().setName(client.getName());
+                }
+                if(client.getAge() != null){
+                    cAux.get().setAge(client.getAge());
+                }
+                if(client.getPassword() != null){
+                    cAux.get().setPassword(client.getPassword());
+                }
+                repository.save(cAux.get());
+                return client;
+            }else{
+                return client;
+            }
+        }else{
+            return client;
+        }
+
+    }
+
+    public boolean delete(int clientId){
+        Boolean resultado = getClient(clientId).map(client ->{
+            repository.delete(client);
+            return true;
+        }).orElse(false);
+
+        return resultado;
+    }
 }

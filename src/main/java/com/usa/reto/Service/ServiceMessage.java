@@ -33,4 +33,28 @@ public class ServiceMessage {
             }
         }
     }
+    public Message update(Message message){
+        if(message.getIdMessage() != null){
+            Optional<Message>mAux= repository.getMessage(message.getIdMessage());
+            if(!mAux.isEmpty()){
+                if(message.getMessageText() != null){
+                    mAux.get().setMessageText(message.getMessageText());
+                }
+                repository.save(mAux.get());
+                return message;
+            }else{
+                return message;
+            }
+        }else{
+            return message;
+        }
+
+    }
+    public boolean delete(int messageId){
+        Boolean resultado = getMessage(messageId).map(message ->{
+            repository.delete(message);
+            return true;
+        }).orElse(false);
+        return resultado;
+    }
 }

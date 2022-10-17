@@ -14,18 +14,23 @@ public class RepositoryGama {
     private RepositoryCrudGama gamarepository;
 
     public List<Gama> getAll() {
+
         return (List<Gama>) gamarepository.findAll();
     }
 
     public Optional<Gama> getGama(int id) {
+
         return gamarepository.findById(id);
     }
 
     public Gama save(Gama gama) {
+
         return gamarepository.save(gama);
     }
 
     public void delete(Gama gama) {
+
         gamarepository.delete(gama);
     }
+
 }

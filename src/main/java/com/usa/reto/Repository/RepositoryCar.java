@@ -14,18 +14,24 @@ public class RepositoryCar {
     private RepositoryCrudCar repository;
 
     public List<Car> getAll() {
+
         return (List<Car>) repository.findAll();
     }
 
     public Optional<Car> getCar(int id) {
+
         return repository.findById(id);
     }
 
     public Car save(Car car) {
+
         return repository.save(car);
     }
 
     public void delete(Car car) {
+
         repository.delete(car);
     }
+
+
 }

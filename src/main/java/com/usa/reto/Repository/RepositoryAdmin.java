@@ -14,18 +14,24 @@ public class RepositoryAdmin {
     private RepositoryCrudAdmin repository;
 
     public List<Admin> getAll(){
+
         return (List<Admin>) repository.findAll();
     }
     
     public Optional<Admin> getAdmin(int id){
+
         return repository.findById(id);
     }
 
     public Admin save(Admin admin){
+
         return repository.save(admin);
     }
     
     public void delete(Admin admin){
+
         repository.delete(admin);
     }
+
+
 }

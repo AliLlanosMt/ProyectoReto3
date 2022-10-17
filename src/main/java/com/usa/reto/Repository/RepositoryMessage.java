@@ -14,18 +14,24 @@ public class RepositoryMessage {
     private RepositoryCrudMessage repository;
     
     public List<Message> getAll(){
+
         return (List<Message>) repository.findAll();
     }
     
     public Optional<Message> getMessage(int id){
+
         return repository.findById(id);
     }
 
     public Message save(Message message){
+
         return repository.save(message);
     }
     
     public void delete(Message message){
+
         repository.delete(message);
     }
+
+
 }

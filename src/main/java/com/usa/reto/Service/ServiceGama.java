@@ -33,4 +33,36 @@ public class ServiceGama {
             }
         }
     }
+    public Gama update (Gama gama){
+        if(gama.getIdGama() != null){
+            Optional<Gama>cAux = repository.getGama(gama.getIdGama());
+            if(!cAux.isEmpty()){
+                if(gama.getDescription() != null){
+                    cAux.get().setDescription(gama.getDescription());
+                }
+                if(gama.getName() != null){
+                    cAux.get().setName(gama.getName());
+                }
+                repository.save(cAux.get());
+                return gama;
+            }else{
+                return gama;
+            }
+
+        }else{
+            return gama;
+        }
+
+    }
+
+    public boolean delete(int gamaId){
+        Boolean resultado = getIdGama(gamaId).map(gama ->{
+            repository.delete(gama);
+            return true;
+
+        }).orElse(false);
+
+        return resultado;
+    }
+
 }

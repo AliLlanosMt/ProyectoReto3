@@ -33,4 +33,34 @@ public class ServiceAdmin {
             }
         }
     }
+
+    public Admin update(Admin admin){
+        if(admin.getIdAdmin() != null){
+            Optional<Admin> aAux = repository.getAdmin(admin.getIdAdmin());
+            if(!aAux.isEmpty()){
+                if(admin.getPassword() != null){
+                    aAux.get(). setPassword(admin.getPassword());
+                }
+                if(admin.getName() != null ){
+                    aAux.get().setName(admin.getName());
+                }
+                repository.save(aAux.get());
+                return aAux.get();
+            }else{
+                return admin;
+            }
+        }else{
+            return admin;
+        }
+
+    }
+
+    public boolean delete(int adminId){
+        Boolean resultado = getAdmin(adminId).map(admin ->{
+            repository.delete(admin);
+            return true;
+        }).orElse(false);
+
+        return resultado;
+    }
 }
