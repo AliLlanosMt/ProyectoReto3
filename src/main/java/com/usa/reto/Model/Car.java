@@ -35,7 +35,7 @@ public class Car implements Serializable {
     public List<Message> messages;
 
     @OneToMany(cascade = { CascadeType.PERSIST }, mappedBy = "car")
-    @JsonIgnoreProperties({ "car", "client" })
+    @JsonIgnoreProperties({ "car" })
     private List<Reservation> reservations;
 
     public Integer getIdCar() {
